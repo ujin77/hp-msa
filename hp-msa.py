@@ -147,15 +147,15 @@ if __name__ == "__main__":
     msa.login()
     if cmd == 'lld':
         if p1 == 'disk':
-            msa.lld('disks',    'controllers',  'controller-id',    'Controller')
+            msa.lld('disks', 'drive', 'durable-id', 'Disk')
         if p1 == 'controller':
-            msa.lld('controllers',          'drive',        'durable-id',       'Disk')
+            msa.lld('controllers', 'controllers', 'controller-id', 'Controller')
         if p1 == 'volume':
             msa.lld('volumes', 'volume', 'volume-name', 'Volume')
         if p1 == 'vdisk':
-            msa.lld('vdisks',     'virtual-disk', 'name',             'Vdisk')
+            msa.lld('vdisks', 'virtual-disk', 'name', 'Vdisk')
         if p1 == 'enclosure':
-            msa.lld('enclosures', 'enclosures',   'enclosure-id',     'Enclosure')
+            msa.lld('enclosures', 'enclosures', 'enclosure-id', 'Enclosure')
 
     elif cmd == 'data':
         if p1 == "disk":
