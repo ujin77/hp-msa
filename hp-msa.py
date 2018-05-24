@@ -38,9 +38,10 @@ class msa_storage(object):
         self.password = password
 
     def _request_url(self, api):
-        return 'https://%s/api%s' % (self.hostname, api)
+        return 'https://%s/api/%s' % (self.hostname, api)
 
     def _request(self, api):
+        # print(self._request_url(api))
         if self.sessionKey:
             req = urllib2.Request(url=self._request_url(api))
             req.add_header('dataType', 'api-brief')
@@ -76,7 +77,7 @@ class msa_storage(object):
         return return_code
 
     def logout(self):
-        self._request('/exit')
+        self._request('exit')
 
     # def objects(self, api, objectName=None, idName=None, pType=None):
     #     xml=self._request(api)
@@ -108,7 +109,7 @@ class msa_storage(object):
         print self.get_zbx()
 
     def stats(self, api, objectName=None, idName=None, pName=None):
-        xml = self._request('%s/%s' % (api, idName))
+        xml = self._request_show('%s/%s' % (api, idName))
         for obj in xml:
             if obj.get('name') == objectName:
                 for prop in obj:
@@ -168,6 +169,7 @@ if __name__ == "__main__":
             msa.data('vdisks', "virtual-disk", "name", p2, p3)
         if p1 == "enclosure":
             msa.data('enclosures', "enclosures", "enclosure-id", p2, p3)
+
     elif cmd == 'stats':
         if p1 == "volume":
             msa.stats('volume-statistics',  'volume-statistics', p2, p3)
