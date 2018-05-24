@@ -7,12 +7,10 @@ import urllib2, ssl
 from hashlib import md5
 from xml.etree.ElementTree import fromstring, ElementTree as ET, dump as ETdump
 import json
-import xmltodict
 
-PROG=os.path.basename(sys.argv[0]).rstrip('.py')
-PROG_DESC='hp-msa client'
-USAGE='Usage: hp-msa.py <HOSTNAME> <USERNAME> <PASSWORD> [lld|stats|data|connect]'
-
+PROG = os.path.basename(sys.argv[0]).rstrip('.py')
+PROG_DESC = 'hp-msa client'
+USAGE = """Usage: hp-msa.py <HOSTNAME> <USERNAME> <PASSWORD> [lld|stats|data]"""
 
 def debug_obj(obj, xml=False):
     if xml:
@@ -149,9 +147,9 @@ if __name__ == "__main__":
     msa.login()
     if cmd == 'lld':
         if p1 == 'disk':
-            msa.lld('controllers',    'controllers',  'controller-id',    'Controller')
+            msa.lld('disks',    'controllers',  'controller-id',    'Controller')
         if p1 == 'controller':
-            msa.lld('disks',          'drive',        'durable-id',       'Disk')
+            msa.lld('controllers',          'drive',        'durable-id',       'Disk')
         if p1 == 'volume':
             msa.lld('volumes', 'volume', 'volume-name', 'Volume')
         if p1 == 'vdisk':
